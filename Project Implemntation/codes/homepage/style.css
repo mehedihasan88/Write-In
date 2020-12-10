@@ -1,0 +1,168 @@
+@import @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,700&display=swap');
+
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+body{
+    font-family: 'Playfair Display', serif;
+    font-size: 20px;
+    background: white;
+
+}
+div{
+/*    border: 1px solid black;*/
+    text-align: center;
+}
+a{
+    text-decoration: none;
+}
+a:hover{
+    color: #1E2024;
+    font-size: 25px;
+    transition: .2s;
+}
+.menu-item button{
+    padding: 8px;
+    background: grey;
+    color : white;
+    border-radius: 16px;
+}
+.menu-item button:hover{
+    background: black;
+    padding: 12px;
+    transition: .3s;
+}
+/* --------Upper-Menu---------   */
+.upper-menu{
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
+    background: white;
+    box-shadow: 2px 5px 4px #585858;
+    margin-bottom: 5px;
+    font-stretch: expanded;
+    letter-spacing: 2px;
+    //**//
+    position: fixed;
+    top: 0;
+    transition: top 0.3s;
+
+}
+.logo{
+    flex:2;
+}
+.logo img{
+    height: 70px;
+    width: 200px;
+}
+.search-box{
+    flex:3;
+    display: flex;
+}
+.search-box img{
+    height: 30px;
+    widows: 30px;
+}
+.search-box input{
+    flex:1;
+}
+.menu-item{
+    flex:1;
+}
+.profile{
+    flex:1;
+}
+.profile img{
+    height: 70px;
+    widows: 70px;
+}
+/* -------Lower-Menu-------*/
+.lower-menu{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 2px 5px 4px #585858;
+    background: white;
+    text-shadow: grey;
+    letter-spacing: 2px;
+    //
+      position: -webkit-sticky; /* Safari */
+      position: sticky;
+      top: 0;
+
+}
+.lower-menu > div{
+    padding: 20px;
+    flex: 1;
+}
+
+
+/* -------news-feed------- */
+
+
+.news-feed{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 50px 25px;
+    justify-content: space-around;
+}
+.news-feed-item{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    max-height: 600px;
+/*
+    min-width: 300px;
+    min-height: 570px;
+*/
+    box-shadow: 2px 5px 4px #888888;
+    margin : 2%;
+    background: white;
+    border : 2px solid red;
+    
+}
+.news-feed-item:hover{
+    box-shadow: 8px 20px 16px #888888;
+    border: 4px solid #6FFF3A;
+    border-radius: 5px;
+}
+.header{
+    flex: 1;
+}
+.main{
+    flex: 6;
+    padding: 3%;
+}
+.tailer{
+    flex: 1;
+    padding: 3%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
