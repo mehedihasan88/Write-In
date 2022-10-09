@@ -1,0 +1,24 @@
+{
+    "name": "write-in",
+    "version": "1.0.0",
+    "description": "A blogging site ",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Mehedi Hasan",
+    "license": "ISC",
+    "engines": {
+        "node": "14.16.1"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "dateformat": "^4.5.1",
+        "ejs": "^3.1.6",
+        "express": "^4.17.1",
+        "jquery": "^3.6.0",
+        "lodash": "^4.17.21",
+        "mongoose": "^5.12.6",
+        "validator": "^13.6.0"
+    }
+}
