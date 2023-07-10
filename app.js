@@ -1,13 +1,12 @@
-//---------//
-//includes//
-//--------//
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
 const _ = require("lodash");
-const mongoose = require("mongoose");
-const date = require("dateformat");
+//const mongoose = require("mongoose");
+//const date = require("dateformat");
 const validator = require("validator");
+const db = require("./database/db");
+const date = require("./utilities/date");
 let loggedIn = "none";
 const adminid = "admin@gmail.com",
     adminpass = "admin123321";
@@ -27,83 +26,21 @@ app.use(bodyParser.urlencoded({
 
 app.use(express.static("public"));
 
-mongoose.connect('mongodb+srv://write-in:write-in88@cluster0.vchqj.mongodb.net/blogDB', {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-});
+//mongoose.connect('mongodb+srv://write-in:write-in88@cluster0.vchqj.mongodb.net/blogDB', {
+//    useNewUrlParser: true,
+//    useUnifiedTopology: true
+//});
 
 
 //-------------------//
-//User defined method//
+//Connecting and setting up the db
 //-------------------//
-function getdate() {
-    return date("dd mmmm yyyy");
-}
-
-function setCur() {
-    const time = [];
-    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-    const thisMonth = Number(date("m"));
-    const thisYear = Number(date("yyyy"));
-    for (let i = thisMonth - 1; i >= 0; i--) {
-        time.push(months[i] + " " + thisYear);
-    }
-    return time;
-}
-
-function setPast() {
-    const time = [];
-    const thisYear = Number(date("yyyy"));
-    for (let i = thisYear - 1; i > 2016; i--) time.push(i);
-    return time;
-}
+db.getConnection();
+PendingPost = db.createPendingPostModel();
+Post = db.createPostModel();
+User = db.createUserModel();
 
 
-
-//--------------------//
-//DB schema and models//
-//--------------------//
-const postSchema = new mongoose.Schema({
-    title: {
-        type: String,
-        required: true
-    },
-    content: {
-        type: String,
-        required: true
-    },
-    tag: {
-        type: String,
-        required: true
-    },
-    time: {
-        type: String,
-        required: true
-
-    },
-    author: {
-        type: String,
-        required: true
-    }
-});
-const userSchema = new mongoose.Schema({
-    name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    posts: [String]
-});
-const PendingPost = mongoose.model("PendingPost", postSchema);
-const Post = mongoose.model("Post", postSchema);
-const User = mongoose.model("User", userSchema);
 
 
 //---------------------//
@@ -120,8 +57,8 @@ app.get("/", function (req, res) {
             console.log(login, logout);
             res.render("home", {
                 posts: posts,
-                current: setCur(),
-                past: setPast(),
+                current: date.setCur(),
+                past: date.setPast(),
                 login: login,
                 logout: logout,
                 admin: admin,
@@ -149,8 +86,8 @@ app.post("/search", function (req, res) {
             else admin = "none", writepanel = "block";
             res.render("home", {
                 posts: posts,
-                current: setCur(),
-                past: setPast(),
+                current: date.setCur(),
+                past: date.setPast(),
                 login: login,
                 logout: logout,
                 admin: admin,
@@ -184,7 +121,7 @@ app.post("/compose", function (req, res) {
                     title: req.body.title,
                     content: req.body.content,
                     tag: req.body.tag,
-                    time: getdate(),
+                    time: date.getDate(),
                     author: user.name
                 });
                 if (req.body.sendAdmin == "") {
@@ -383,8 +320,8 @@ app.get("/category/:name", function (req, res) {
             res.render("home", {
                 posts: posts,
                 type: type,
-                current: setCur(),
-                past: setPast(),
+                current: date.setCur(),
+                past: date.setPast(),
                 login: login,
                 logout: logout,
                 admin: admin,
@@ -409,8 +346,8 @@ app.get("/archive/:key", function (req, res) {
             else admin = "none", writepanel = "block";
             res.render("home", {
                 posts: posts,
-                current: setCur(),
-                past: setPast(),
+                current: date.setCur(),
+                past: date.setPast(),
                 login: login,
                 logout: logout,
                 admin: admin,
@@ -477,7 +414,7 @@ app.post("/register", function (req, res) {
 
 let port = process.env.PORT;
 if (port == null || port == "") {
-    port = 3000;
+    port = 80;
 }
 app.listen(port, function () {
     console.log("server started successfully");
